@@ -1,0 +1,47 @@
+{%extends "blog/base.html"%}
+{%block style%}
+
+.django-ckeditor-widget{
+    width: 100%;
+    height: 50%;
+}
+
+.tox{
+    height:  600px;
+}
+html, body {margin: 0; height: 100%; overflow: hidden}
+{%endblock%}
+
+{%block content%}
+    <!-- <form action="" method="post">
+        {% csrf_token %}
+        <label for="title">
+            title
+            <input type="text" name="title" required>
+
+        </label>
+        <label for="body">
+            body:
+            <textarea name="body" id="" cols="30" rows="10"></textarea>
+        </label>
+        <input type="submit" value="submit">
+    </form> -->
+    <form action="" method="POST">
+        {%csrf_token%}
+        {{form.media}}
+        {{form.as_p}}
+        <input type="submit" value="submit">
+    </form>
+<script>
+    tinyMCE.init({
+    mode: "textareas",
+    theme: "silver",
+    height:"400px",
+    plugins: 'print,preview,powerpaste,casechange,importcss,tinydrive,searchreplace,autolink,autosave,save,directionality,advcode,visualblocks,visualchars,fullscreen,image,link,media,mediaembed,template,codesample,table,charmap,hr,pagebreak,nonbreaking,anchor,toc,insertdatetime,advlist,lists,checklist,wordcount,tinymcespellchecker,a11ychecker,imagetools,textpattern,noneditable,help,formatpainter,permanentpen,pageembed,charmap,tinycomments,mentions,quickbars,linkchecker,emoticons,advtable,export,',
+    language: "{{ language }}",
+    directionality: "{{ directionality }}",
+    spellchecker_languages : "{{ spellchecker_languages }}",
+    spellchecker_rpc_url : "{{ spellchecker_rpc_url }}"
+});
+</script>
+{%endblock%}

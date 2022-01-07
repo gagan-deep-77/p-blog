@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{%endblock%}</title>
+    <style>
+        *{
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: 1.5vw;
+        }
+        header{
+            width: 100%;
+            text-align: center;
+            font-size: 3vw;
+            padding-bottom:1%;
+        }
+        .navbar-con>a{
+            font-size:2vw;
+            text-decoration: none;
+            border: 2px solid black;
+            padding:3px;
+        }
+        .navbar-con>a:hover{
+            color: white;
+            background: black;
+        }
+        #message{
+            color: red;
+            margin-bottom: 5px;
+        }
+        {%block style%}
+        {%endblock%}
+    </style>
+</head>
+<body>
+    <header>
+        P-BLOG
+        {%with show_navlinks=True%}
+        {%if show_navlinks%}
+            {%if request.user.is_authenticated%}
+            <div class="navbar-con">
+                <a href="{%url 'create-post'%}">+Post</a>
+                <a href="{%url 'logout'%}">logout</a>
+            </div>
+            {%endif%}
+            {%if not request.user.is_authenticated%}
+                    <div class="navbar-con">
+                        <a href="{%url 'register-user'%}">register</a>
+                    <a href="{%url 'login'%}">login</a>
+                    </div>
+                {%endif%}
+        {%endif%}
+        {%endwith%}
+        
+    </header>
+    {%if messages%}
+    {%for message in messages%}
+        <div id="message" >{{message}}</div>
+    {%endfor%}
+    {%endif%}
+    {%block content%}
+
+    {%endblock%}
+</body>
+</html>

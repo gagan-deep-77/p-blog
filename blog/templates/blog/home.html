@@ -1,0 +1,38 @@
+{%extends "blog/base.html"%}
+{%load humanize%}
+{%block title%}{%endblock%}
+
+{%block style%}
+#like-span{
+    color: 	#DC143C;
+}
+#main-container{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+#child-container{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+}
+{%endblock%}
+{%block content%}
+<!-- <div id="navbar-con">
+    <a href="">+Post</a>
+    <a href="">logout</a>
+</div> -->
+    {%for post in posts%}
+        <div id="main-container">
+            <a href="{%url 'view-post' post.id%}">{{post.title}}</a>&nbsp;&nbsp; <div id="child-container">
+               
+                <a href="">{{post.user.username}}</a>&nbsp; <span id="like-span">likes: {{post.likes}}</span> &nbsp;{{post.pub_date}}({{post.pub_date|naturaltime}}){%if user.username == post.user.username%}
+                <a href="{%url 'delete-post' post.id%}">delete</a>
+           {%endif%}
+            </div> 
+        </div>
+        <br>
+        <hr>
+    {%endfor%}
+
+{%endblock%}

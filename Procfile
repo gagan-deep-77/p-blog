@@ -1,0 +1,1 @@
+web: gunicorn pers_blog.wsgi
